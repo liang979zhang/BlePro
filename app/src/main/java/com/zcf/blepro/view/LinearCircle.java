@@ -78,8 +78,8 @@ public class LinearCircle extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         width = w;
         height = h;
-        outerR = w;
-        innerR = (int) (outerR * 0.85f);
+        outerR = w/2;
+        innerR = (int) (outerR/2 * 0.85f);
         arrowLength = innerR * percent;
         //让指针一开始指向正上方
         nowX = -1;
@@ -90,7 +90,7 @@ public class LinearCircle extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.translate(width, height);//设置原点
+        canvas.translate(width/2, height/2);//设置原点
 
         drawOuterCircle();
         drawInnerCircle();
@@ -240,28 +240,6 @@ public class LinearCircle extends View {
         Log.e("ttt", "nowTana====" + nowTana);
         Log.e("tta", "endPoint[0]==" + endPoint[0]);
         Log.e("tta", "endPoint[1]==" + endPoint[1]);
-        //第一象限的处理
-        if (endPoint[0] > 0 && endPoint[1] > 0) {
-            //右下角的情况处理
-            double nowTan = endPoint[1] / endPoint[0];
-            //当前触摸位置的tan值大于边界的tan值，表示手指目前在左侧边界的下方
-            if (nowTan > rightEndTan) {
-                endPoint[0] = rightEndPoint[0];
-                endPoint[1] = rightEndPoint[1];
-            }
-        }
-        //第二象限的处理
-        if (endPoint[0] < 0 && endPoint[1] > 1) {
-            //左下角的情况处理
-            double nowTan = endPoint[1] / endPoint[0];
-            //当前触摸位置的tan值小于边界的tan值，表示手指目前在右侧边界的下方
-            if (nowTan < leftEndTan) {
-                endPoint[0] = leftEndPoint[0];
-                endPoint[1] = leftEndPoint[1];
-            }
-        }
-        //这里默认了第三、第四现象一般没有限制；如果圆弧的缺口过大，需要处理下；方式与上面的相似
-
 
         //这时，指针的末尾位置最终确定了，可以绘制了
         arrowPath.moveTo(0, 0);

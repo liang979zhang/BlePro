@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PathMeasure;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.support.annotation.Nullable;
@@ -17,7 +16,7 @@ import android.view.View;
 public class DashboardView2 extends View {
 
     private int minWidthDP = 200;
-    private int minHeightDP = 100;
+    private int minHeightDP = 200;
 
     private Paint arcPaint, arcInnerPaint, linePaint, textPaint;
     private int arcColor = Color.parseColor("#0096ff");  //外层弧形颜色
@@ -262,15 +261,4 @@ public class DashboardView2 extends View {
             canvas.rotate(5, mwidth / 2, mheight);
         }
     }
-
-
-//    //绘制刻度
-//    private void drawScale2(Canvas canvas) {
-//
-//        //用于外层圆的测量
-//        PathMeasure outMeasure = new PathMeasure(outerCirclePath, false);
-//        float outlength = outMeasure.getLength();
-//        float[] outPos = new float[2];
-//    }
-
 }
